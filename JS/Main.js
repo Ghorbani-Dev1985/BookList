@@ -135,3 +135,12 @@ function DeleteBookListItem(id, title) {
   BookListAlert.innerHTML = `یادداشت با عنوان ${title} حذف گردید.`;
   RemoveAlert();
 }
+function GetLocalStorage() {
+  let getBookLists = JSON.parse(localStorage.getItem("BookLists"));
+  if (getBookLists) {
+    BookListItems = getBookLists;
+  } else {
+    BookListItems = [];
+  }
+  BookListGenerator(BookListItems);
+}
