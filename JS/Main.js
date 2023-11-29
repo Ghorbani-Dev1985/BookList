@@ -81,3 +81,44 @@ function BookListGenerator(BookLists) {
     NullBookList.textContent = "هیچ کتابی تاکنون ثبت نگردیده است.";
   }
 }
+function EditBookListItems(id) {
+  scrollTo(0, 0);
+  let localStorageBookLists = JSON.parse(localStorage.getItem("BookLists"));
+  BookListItems = localStorageBookLists;
+  BookListItems.forEach((BookListItem) => {
+    if (BookListItem.id === id) {
+      AddBookBtn.classList.add("hidden");
+      EditBookBtn.classList.remove("hidden");
+      BookTitleInput.value = BookListItem.BookTitle;
+      BookSubjectInput.value = BookListItem.BookSubject;
+      BookAuthorInput.value = BookListItem.BookAuthor;
+      EditBookBtn.addEventListener("click", () => {
+        let BookTitleInputValue = BookTitleInput.value.trim();
+        let BookSubjectInputValue = BookSubjectInput.value.trim();
+        let BookAuthorInputValue = BookAuthorInput.value.trim();
+        if (
+          BookTitleInputValue ||
+          BookSubjectInputValue ||
+          BookAuthorInputValue
+        ) {
+          BookListItem.BookTitle = BookTitleInputValue;
+          BookListItem.BookSubject = BookSubjectInputValue;
+          BookListItem.BookAuthor = BookAuthorInputValue;
+          console.log(BookAuthorInputValue);
+          SetLocalStorage(BookListItems);
+          BookListGenerator(BookListItems);
+          GreenAlert();
+          BookListAlert.innerHTML = `یادداشت با عنوان (${BookListItem.BookTitle}) با موفقیت ویرایش گردید.`;
+          RemoveAlert();
+          AddBookBtn.classList.remove("hidden");
+          EditBookBtn.classList.add("hidden");
+          ClearInputs();
+        } else {
+          RedAlert();
+          BookListAlert.innerHTML = `لطفا همه موارد را وارد نمایید.`;
+          RemoveAlert();
+        }
+      });
+    }
+  });
+}
