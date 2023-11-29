@@ -144,3 +144,10 @@ function GetLocalStorage() {
   }
   BookListGenerator(BookListItems);
 }
+
+// EventListener
+BookListForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+AddBookBtn.addEventListener("click", AddNewBookList);
+window.addEventListener("load", GetLocalStorage);
