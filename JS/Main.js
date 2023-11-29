@@ -42,3 +42,42 @@ function AddNewBookList() {
 function SetLocalStorage(BookLists) {
   localStorage.setItem("BookLists", JSON.stringify(BookLists));
 }
+function BookListGenerator(BookLists) {
+  if (BookLists.length > 0) {
+    let TrEle,
+      TitleTdEle,
+      SubjectTdEle,
+      AuthorTdEle,
+      EditImg,
+      DeleteImg,
+      EditTd,
+      DeleteTd;
+    BookListItemsBody.innerHTML = "";
+    BookLists.forEach((BookList) => {
+      TrEle = $.createElement("tr");
+      TitleTdEle = $.createElement("td");
+      SubjectTdEle = $.createElement("td");
+      AuthorTdEle = $.createElement("td");
+      EditTd = $.createElement("td");
+      DeleteTd = $.createElement("td");
+      EditImg = $.createElement("img");
+      DeleteImg = $.createElement("img");
+      EditImg.setAttribute("src", "./Assets/Images/edit.svg");
+      DeleteImg.setAttribute("src", "./Assets/Images/trash.svg");
+      EditImg.addEventListener("click", () => EditBookListItems(BookList.id));
+      DeleteImg.addEventListener("click", () =>
+        DeleteBookListItem(BookList.id, BookList.BookTitle)
+      );
+      EditTd.append(EditImg);
+      DeleteTd.append(DeleteImg);
+      TitleTdEle.textContent = BookList.BookTitle;
+      SubjectTdEle.textContent = BookList.BookSubject;
+      AuthorTdEle.textContent = BookList.BookAuthor;
+      TrEle.append(TitleTdEle, SubjectTdEle, AuthorTdEle, EditTd, DeleteTd);
+      BookListItemsBody.append(TrEle);
+      BookListTable.style.display = "block";
+    });
+  } else {
+    NullBookList.textContent = "هیچ کتابی تاکنون ثبت نگردیده است.";
+  }
+}
