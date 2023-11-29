@@ -144,7 +144,27 @@ function GetLocalStorage() {
   }
   BookListGenerator(BookListItems);
 }
-
+function RedAlert() {
+  BookListAlert.style.visibility = "visible";
+  BookListAlert.style.opacity = 1;
+  BookListAlert.style.color = "#f43f5e";
+}
+function GreenAlert() {
+  BookListAlert.style.visibility = "visible";
+  BookListAlert.style.opacity = 1;
+  BookListAlert.style.color = "#22c55e";
+}
+function RemoveAlert() {
+  setTimeout(() => {
+    BookListAlert.style.visibility = "hidden";
+    BookListAlert.style.opacity = 0;
+  }, 2000);
+}
+function ClearInputs() {
+  BookTitleInput.value = "";
+  BookSubjectInput.value = "";
+  BookAuthorInput.value = "";
+}
 // EventListener
 BookListForm.addEventListener("submit", (e) => {
   e.preventDefault();
