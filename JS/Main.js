@@ -1,16 +1,20 @@
-let $ = document;
-let Header = $.querySelector("#Header");
-let ScrollUpBtn = $.querySelector(".ScrollUpBtn");
-let BookListForm = $.querySelector("#BookListForm");
-let BookListAlert = $.querySelector("#BookListAlert");
-let BookTitleInput = $.querySelector("#BookTitleInput");
-let BookSubjectInput = $.querySelector("#BookSubjectInput");
-let BookAuthorInput = $.querySelector("#BookAuthorInput");
-let AddBookBtn = $.querySelector(".AddBookBtn");
-let EditBookBtn = $.querySelector(".EditBookBtn");
-let BookListTable = $.querySelector(".BookListTable");
-let BookListItemsBody = $.querySelector(".BookListItemsBody");
-let NullBookList = $.querySelector(".NullBookList");
+const $ = document;
+const Header = $.querySelector("#Header")
+const ScrollUpBtn = $.querySelector(".ScrollUpBtn")
+const BookListForm = $.querySelector("#BookListForm")
+const BookListAlert = $.querySelector("#BookListAlert")
+const BookTitleInput = $.querySelector("#BookTitleInput")
+const BookSubjectInput = $.querySelector("#BookSubjectInput")
+const BookAuthorInput = $.querySelector("#BookAuthorInput")
+const AddBookBtn = $.querySelector(".AddBookBtn")
+const EditBookBtn = $.querySelector(".EditBookBtn")
+const BookListTable = $.querySelector(".BookListTable")
+const BookListItemsBody = $.querySelector(".BookListItemsBody")
+const NullBookList = $.querySelector(".NullBookList")
+const DeleteModal = $.querySelector('.DeleteModal')
+const Overlay = $.querySelector('.Overlay')
+const DeleteModalYesBtn = $.querySelector('#DeleteModal__YesBtn')
+const DeleteModalNoBtn = $.querySelector('#DeleteModal__NoBtn')
 let BookListItems = [];
 
 
@@ -53,7 +57,7 @@ function BookListGenerator(BookLists) {
       EditTd,
       DeleteTd;
     BookListItemsBody.innerHTML = "";
-    BookLists.forEach((BookList) => {
+    BookLists.forEach(({id , BookTitle , BookSubject , BookAuthor}) => {
       TrEle = $.createElement("tr");
       TitleTdEle = $.createElement("td");
       SubjectTdEle = $.createElement("td");
@@ -64,15 +68,25 @@ function BookListGenerator(BookLists) {
       DeleteImg = $.createElement("img");
       EditImg.setAttribute("src", "./Assets/Images/edit.svg");
       DeleteImg.setAttribute("src", "./Assets/Images/trash.svg");
-      EditImg.addEventListener("click", () => EditBookListItems(BookList.id));
+      EditImg.addEventListener("click", () => EditBookListItems(id));
       DeleteImg.addEventListener("click", () =>
-        DeleteBookListItem(BookList.id, BookList.BookTitle)
+      OpenModal()
       );
+      DeleteModal.innerHTML = `  <div class="DeleteModal__Header">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#be123c" width="30px" height="30px">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        </svg>          
+      <h2>آیا برای حذف مطمعن هستید؟</h2>
+   </div>
+   <div class="DeleteModal__Btns">
+      <button id="DeleteModal__YesBtn" onClick="DeleteBookListItem(id , title)">بله</button>
+      <button id="DeleteModal__NoBtn" onClick="CloseModal()">خیر</button>
+   </div>`
       EditTd.append(EditImg);
       DeleteTd.append(DeleteImg);
-      TitleTdEle.textContent = BookList.BookTitle;
-      SubjectTdEle.textContent = BookList.BookSubject;
-      AuthorTdEle.textContent = BookList.BookAuthor;
+      TitleTdEle.textContent = BookTitle;
+      SubjectTdEle.textContent = BookSubject;
+      AuthorTdEle.textContent = BookAuthor;
       TrEle.append(TitleTdEle, SubjectTdEle, AuthorTdEle, EditTd, DeleteTd);
       BookListItemsBody.append(TrEle);
       BookListTable.style.display = "block";
@@ -122,9 +136,18 @@ function EditBookListItems(id) {
     }
   });
 }
+function OpenModal(){
+  DeleteModal.style.display = 'block'
+  Overlay.style.display = 'block'
+}
+function CloseModal(){
+  DeleteModal.style.display = 'none'
+  Overlay.style.display = 'none'
+}
 function DeleteBookListItem(id, title) {
   let getBookLists = JSON.parse(localStorage.getItem("BookLists"));
   BookListItems = getBookLists;
+  console.log(typeof BookListItems);
   let deleteBookListItem = BookListItems.findIndex((BookListItem) => {
     return BookListItem.id === id;
   });
@@ -133,7 +156,11 @@ function DeleteBookListItem(id, title) {
   BookListGenerator(BookListItems);
   RedAlert();
   BookListAlert.innerHTML = `یادداشت با عنوان ${title} حذف گردید.`;
+  if(BookListItems.length === 0){
+  window.location.reload();
+  }
   RemoveAlert();
+  CloseModal()
 }
 function GetLocalStorage() {
   let getBookLists = JSON.parse(localStorage.getItem("BookLists"));
@@ -166,6 +193,9 @@ function ClearInputs() {
   BookAuthorInput.value = "";
 }
 // EventListener
+
+
+Overlay.addEventListener('click' , CloseModal)
 $.addEventListener("scroll", () => {
   if ($.documentElement.scrollTop > 0) {
     Header.classList.add("GlassBg");
