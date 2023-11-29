@@ -39,3 +39,6 @@ function AddNewBookList() {
     RemoveAlert();
   }
 }
+function SetLocalStorage(BookLists) {
+  localStorage.setItem("BookLists", JSON.stringify(BookLists));
+}
