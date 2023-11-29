@@ -166,6 +166,23 @@ function ClearInputs() {
   BookAuthorInput.value = "";
 }
 // EventListener
+$.addEventListener("scroll", () => {
+  if ($.documentElement.scrollTop > 0) {
+    Header.classList.add("GlassBg");
+  }
+  if ($.documentElement.scrollTop >= 200) {
+    ScrollUpBtn.style.visibility = "visible";
+    ScrollUpBtn.style.opacity = 1;
+  } else {
+    Header.classList.remove("GlassBg");
+    ScrollUpBtn.style.visibility = "hidden";
+    ScrollUpBtn.style.opacity = 0;
+  }
+});
+
+ScrollUpBtn.addEventListener("click", () => {
+  scrollTo(0, 0);
+});
 BookListForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
