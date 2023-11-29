@@ -515,16 +515,18 @@ input::placeholder {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
-.BookListTable th{
+.BookListTable thead th{
+  width: 145px;
   background-color: var(--SectionBG);
   text-align: center;
-  padding: 20px;
+  padding: 20px 5px;
   font-weight: bold;
   font-size: 20px;
   border-bottom: 2px dashed #f59e0b;
+
+
 }
 .BookListTable tbody tr td{
-
   text-align: center;
   padding: 10px;
 
