@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book List</title>
+    <link rel="stylesheet" href="./Css/index.css" />
+    <link rel="icon" href="./Assets/Images/logo.svg" type="image/svg">
+  </head>
+  <body>
+    <header id="Header">
+      <div class="container">
+        <section class="header__wrapper">
+          <div class="header__logo">
+            <img src="./Assets/Images/logo.svg" alt="logo" class="logo" />
+            <p>  لیست کتاب</p>
+          </div>
+          <p id="BookListAlert"></p>
+        </section>
+      </div>
+    </header>
+<main id="StartBox">
+  <div class="container">
+    <section class="BookListWrapper">
+      <h2 class="mb-50">افزودن کتاب جدید</h2>
+      <form id="BookListForm" class="w-full flex flex-col items-center gap-20" autocomplete="off">
+        <input type="text" id="BookTitleInput" placeholder="افزودن عنوان کتاب" />
+        <input type="text" id="BookSubjectInput" placeholder="افزودن موضوع کتاب" />
+        <input type="text" id="BookAuthorInput" placeholder="افزودن نام نویسنده کتاب" />
+        <button class="flex justify-center items-center gap-10 AddBookBtn"><img src="./Assets/Images/tick.svg" alt="tick" /><span>ثبت کتاب</span></button>
+        <button class="flex justify-center items-center gap-10 hidden EditBookBtn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" width="20" hieght="20">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+        </svg><span>ثبت ویرایش</span></button>
+      </form>
+    </section>
+    <p class="Line"></p>
+      <h2 class="w-full flex justify-center items-center text-white my-50">کتاب های افزوده شده</h2>
+      <p class="w-full flex justify-center items-center text-white my-50 NullBookList"></p>
+      <table class="BookListTable">
+        <thead>
+          <tr>
+            
+            <th scope="col">عنوان کتاب</th>
+            <th scope="col">موضوع کتاب</th>
+            <th scope="col">نویسنده کتاب</th>
+            <th scope="col"> ویرایش</th>
+            <th scope="col"> حذف</th>
+          </tr>
+        </thead>
+        <tbody class="BookListItemsBody">
+       
+          
+        </tbody>
+      </table>
+    
+  </div>
+</main>
+<footer>
+  <button class="ScrollUpBtn">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+    </svg>    
+  </button>
+</footer>
+    <script src="./JS/Main.js"></script>
+  </body>
+</html>
