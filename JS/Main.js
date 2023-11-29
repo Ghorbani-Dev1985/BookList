@@ -122,3 +122,16 @@ function EditBookListItems(id) {
     }
   });
 }
+function DeleteBookListItem(id, title) {
+  let getBookLists = JSON.parse(localStorage.getItem("BookLists"));
+  BookListItems = getBookLists;
+  let deleteBookListItem = BookListItems.findIndex((BookListItem) => {
+    return BookListItem.id === id;
+  });
+  BookListItems.splice(deleteBookListItem, 1);
+  SetLocalStorage(BookListItems);
+  BookListGenerator(BookListItems);
+  RedAlert();
+  BookListAlert.innerHTML = `یادداشت با عنوان ${title} حذف گردید.`;
+  RemoveAlert();
+}
