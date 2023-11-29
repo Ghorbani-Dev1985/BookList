@@ -22,6 +22,7 @@ function AddNewBookList() {
   let BookTitleInputValue = BookTitleInput.value.trim();
   let BookSubjectInputValue = BookSubjectInput.value.trim();
   let BookAuthorInputValue = BookAuthorInput.value.trim();
+  NullBookList.innerHTML = ""
   if (BookTitleInputValue || BookSubjectInputValue || BookAuthorInputValue) {
     let NewBookListObj = {
       id: BookListItems.length + 1,

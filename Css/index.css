@@ -505,8 +505,7 @@ input::placeholder {
 .BookListTable{
   display: none;
   color: #fff;
-  width: auto;
-  max-width: 45rem;
+  width: 100%;
   margin: 0 auto 40px auto;
   border: var(--Border);
   border-radius: 8px;
@@ -516,20 +515,20 @@ input::placeholder {
   -o-border-radius: 8px;
 }
 .BookListTable thead th{
-  width: 145px;
   background-color: var(--SectionBG);
   text-align: center;
   padding: 20px 5px;
   font-weight: bold;
   font-size: 20px;
   border-bottom: 2px dashed #f59e0b;
-
+  width: 100%;
 
 }
 .BookListTable tbody tr td{
   text-align: center;
   padding: 10px;
-
+  line-height: 2rem;
+  text-wrap: nowrap;
 }
 .BookListItemsBody img{
   cursor: pointer;
