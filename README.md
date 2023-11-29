@@ -21,6 +21,7 @@ Develop with JS
 <li>You can edit books</li>
 <li>You can delete book from list</li>
 <li>You can scroll top</li>
+<li>Full responsive</li>
 </ul>
 
 

@@ -688,6 +688,10 @@ input::placeholder {
   .BookListTable{
     overflow-x: scroll;
   }
+  .DeleteModal__Header h2{
+    text-align: center;
+      line-height: 2.5rem;
+  }
 }
 
 @media screen and (min-width: 500px) {
